@@ -1,10 +1,16 @@
 <html>
 	<head>
+		<title>My first Three.js app</title>
+		<style>
+			body { margin: 0;}
+			canvas { width: 100%; height: 100%;}
+		</style>
 	</head>
 	<body>
 		<script src="js/three.min.js"></script>
+		<script src="js/TrackballControls.js"></script>
 		<script>
-		    var scene, camera, renderer;
+		    var scene, camera, renderer, controls;
 		    var geometry, material, mesh;
 
 		    init();
@@ -17,7 +23,7 @@
 		        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
 		        camera.position.z = 1000;
 
-		        geometry = new THREE.BoxGeometry( 200, 200, 200 );
+		        geometry = new THREE.BoxGeometry( 400, 400, 400 );
 		        material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
 
 		        mesh = new THREE.Mesh( geometry, material );
@@ -28,19 +34,17 @@
 
 		        document.body.appendChild( renderer.domElement );
 
+		        controls = new THREE.TrackballControls( camera, renderer.domElement );
 		    }
 
 		    function animate() {
 
 		        requestAnimationFrame( animate );
 
-		        mesh.rotation.x += 0.01;
-		        mesh.rotation.y += 0.02;
-
+		        controls.update();
 		        renderer.render( scene, camera );
 
 		    }
-
 		</script>
 	</body>
 </html>
